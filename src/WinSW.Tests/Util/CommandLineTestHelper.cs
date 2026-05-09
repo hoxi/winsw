@@ -78,7 +78,7 @@ $@"<service>
             Console.SetOut(swOut);
             Console.SetError(swError);
             Program.TestConfig = config ?? DefaultServiceConfig;
-            Program.TestExceptionHandler = (e, _) => exception = e;
+            Program.TestExceptionHandler = e => exception = e;
             try
             {
                 _ = Program.Main(arguments);

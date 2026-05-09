@@ -23,14 +23,14 @@ namespace WinSW.Logging
 
             if (eventLog is not null)
             {
-                eventLog.WriteEntry(loggingEvent.RenderedMessage, ToEventLogEntryType(loggingEvent.Level));
+                eventLog.WriteEntry(loggingEvent.RenderedMessage ?? string.Empty, ToEventLogEntryType(loggingEvent.Level!));
                 return;
             }
 
             try
             {
                 using var backupLog = new EventLog("Application", ".", "Windows Service Wrapper");
-                backupLog.WriteEntry(loggingEvent.RenderedMessage, ToEventLogEntryType(loggingEvent.Level));
+                backupLog.WriteEntry(loggingEvent.RenderedMessage ?? string.Empty, ToEventLogEntryType(loggingEvent.Level!));
             }
             catch
             {

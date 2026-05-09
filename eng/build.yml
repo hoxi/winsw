@@ -32,9 +32,9 @@ steps:
     projects: src\WinSW.sln
     arguments: -c $(BuildConfiguration) -p:Version=$(BuildVersion)
 - script: |
-    dotnet publish src\WinSW\WinSW.csproj -c $(BuildConfiguration) -f net7.0-windows -r win-x64 --sc -p:Version=$(BuildVersion)
-    dotnet publish src\WinSW\WinSW.csproj -c $(BuildConfiguration) -f net7.0-windows -r win-x86 --sc -p:Version=$(BuildVersion)
-    dotnet publish src\WinSW\WinSW.csproj -c $(BuildConfiguration) -f net7.0-windows -r win-arm64 --sc -p:Version=$(BuildVersion)
+    dotnet publish src\WinSW\WinSW.csproj -c $(BuildConfiguration) -f net10.0-windows -r win-x64 --sc -p:Version=$(BuildVersion)
+    dotnet publish src\WinSW\WinSW.csproj -c $(BuildConfiguration) -f net10.0-windows -r win-x86 --sc -p:Version=$(BuildVersion)
+    dotnet publish src\WinSW\WinSW.csproj -c $(BuildConfiguration) -f net10.0-windows -r win-arm64 --sc -p:Version=$(BuildVersion)
   displayName: Build
 - task: DotNetCoreCLI@2
   displayName: Test
@@ -55,10 +55,6 @@ steps:
     packagesToPack: WinSW.nuspec
     versioningScheme: byEnvVar
     versionEnvVar: BuildVersion
-
-- publish: artifacts\publish\WinSW-net461.exe
-  artifact: WinSW-net461.exe_$(BuildConfiguration)
-  displayName: Publish .NET 4.6.1
 
 - publish: artifacts\publish\WinSW-x64.exe
   artifact: WinSW-x64.exe_$(BuildConfiguration)

@@ -1,7 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net471;net7.0-windows</TargetFrameworks>
+    <TargetFramework>net10.0-windows</TargetFramework>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
@@ -24,11 +24,6 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' != 'net7.0-windows'">
-    <PackageReference Include="System.Reflection.Metadata" Version="7.0.0" />
-    <Reference Include="System.ServiceProcess" />
-  </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\WinSW\WinSW.csproj" />
     <ProjectReference Include="..\WinSW.Core\WinSW.Core.csproj" />
@@ -43,12 +38,8 @@
 
   <Target Name="Copy" BeforeTargets="AfterBuild">
 
-    <ItemGroup Condition="'$(TargetFramework)' == 'net7.0-windows'">
-      <_FilesToCopy Include="$(ArtifactsBinDir)WinSW\$(Configuration)\net7.0-windows\WinSW.runtimeconfig*.json" />
-    </ItemGroup>
-
-    <ItemGroup Condition="'$(TargetFramework)' != 'net7.0-windows'">
-      <_FilesToCopy Include="$(ArtifactsBinDir)WinSW\$(Configuration)\net461\System.ValueTuple.dll" />
+    <ItemGroup>
+      <_FilesToCopy Include="$(ArtifactsBinDir)WinSW\$(Configuration)\net10.0-windows\WinSW.runtimeconfig*.json" />
     </ItemGroup>
 
     <Copy SourceFiles="@(_FilesToCopy)" DestinationFolder="$(OutputPath)" />
